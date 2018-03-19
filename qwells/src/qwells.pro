@@ -1,6 +1,6 @@
 
 TEMPLATE = app
-TARGET = qWells_0.3.25
+TARGET = qWells_1.3.25
 
 CONFIG += qt \
 c++11
@@ -14,7 +14,6 @@ QMAKE_CXXFLAGS_RELEASE *= -O3
 #INCLUDEPATH += /home/mdotlic/Qt/5.5/gcc_64/lib/cmake /home/mdotlic/Qt/5.5/gcc_64/include
 
 SOURCES += main.cpp \
-           license.cpp \
            qWells.cpp \
            centralWindow.cpp \
            mainMenu.cpp \
@@ -79,7 +78,6 @@ SOURCES += main.cpp \
            result/staticLevel.cpp \
 
 HEADERS += qWells.h \
-   license.h \
    centralWindow.h \
    mainMenu.h \
    io.h \

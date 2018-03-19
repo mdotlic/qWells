@@ -4,7 +4,6 @@
 #include <QTimer>
 #include "qWells.h"
 #include "mainMenu.h"
-#include "license.h"
 #include <QDebug>
 #include <QString>
 //#include <windows.h>
@@ -12,12 +11,12 @@
 int main(int argc, char *argv[])
 {
    QApplication app(argc, argv);
-#if (defined(__MINGW32__) || defined(__MINGW64__))
+/*#if (defined(__MINGW32__) || defined(__MINGW64__))
    bool active;
    License license(active);
    if(active)
    {
-#endif
+#endif*/
    QTranslator translator;
    app.installTranslator(&translator);
    QWells qWells;
@@ -46,10 +45,10 @@ int main(int argc, char *argv[])
    qWells.show();
 
    return app.exec();
-#if (defined(__MINGW32__) || defined(__MINGW64__))
+/*#if (defined(__MINGW32__) || defined(__MINGW64__))
    }else
       return 1;
-#endif
+#endif*/
 }
 
 
