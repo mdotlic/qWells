@@ -1,0 +1,44 @@
+#include "isoResult.h"
+#include "engine/data.h"
+#include <QDebug>
+
+IsoResult::IsoResult(Data * data):_data(data)
+{}
+
+void IsoResult::calculateResult(const double xmin, const double xmax, 
+           const double ymin, const double ymax, const int xdiv, const int ydiv)
+{
+   _xmin=xmin;
+   _xmax=xmax;
+   _ymin=ymin;
+   _ymax=ymax;
+   _xdiv=xdiv;
+   _ydiv=ydiv;
+   double dx=(xmax-xmin)/xdiv;
+   double dy=(ymax-ymin)/ydiv;
+   _result.resize(xdiv+1);
+   for(int i=0;i<=xdiv;i++)
+   {
+      _result[i].resize(ydiv+1);
+      for(int j=0;j<=ydiv;j++)
+      {
+         qDebug()<<" racunaj u tacki "<<xmin+dx*i<<"; "<<ymin+dy*j<<"\n";
+         _result[i][j]=SuperPos::calculateInPoint(_data->wells(), 
+         _data->fictiveWells(), _data->getModel(), _data->t(), 
+         Point2 (xmin+dx*i,ymin+dy*j));
+         for(int iii=0;iii<_result[i][j].size();iii++)
+            qDebug()<<iii<<" --- "<<_result[i][j][iii]<<"\n";
+      }
+   }
+   qDebug()<<" TTTT \n";
+}
+
+void IsoResult::calcMarchingSquares(const QVector<double> & listNumbers)
+{
+   const int nisol=listNumbers.size();
+   const int ntimes=_data->t().size();
+   QVector<QVector<QPoint> > verEdgesPoint(ntimes);
+   QVector<QVector<QPoint> > horEdgesPoint(ntimes);
+   qDebug()<<" racuna marching \n";
+
+}

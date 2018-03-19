@@ -1,0 +1,33 @@
+<!DOCTYPE RCC><RCC version="1.0">
+ <qresource>
+     <file>../resources/images/chart.png</file>
+     <file>../resources/images/chart1.png</file>
+     <file>../resources/images/clock.png</file>
+     <file>../resources/images/contract11.png</file>
+     <file>../resources/images/folder.png</file>
+     <file>../resources/images/help.png</file>
+     <file>../resources/images/info.png</file>
+     <file>../resources/images/logoJCI.png</file>
+     <file>../resources/images/new_page.png</file>
+     <file>../resources/images/save.png</file>
+     <file>../resources/images/search_magnifier.png</file>
+     <file>../resources/images/tabOpen.png</file>
+     <file>../resources/images/tabClosed.png</file>
+     <file>../resources/images/tools.png</file>
+     <file>../resources/images/colors/black.png</file>
+     <file>../resources/images/colors/blue.png</file>
+     <file>../resources/images/colors/cyan.png</file>
+     <file>../resources/images/colors/gray.png</file>
+     <file>../resources/images/colors/green.png</file>
+     <file>../resources/images/colors/magenta.png</file>
+     <file>../resources/images/colors/red.png</file>
+     <file>../resources/images/colors/yellow.png</file>
+     <file>../resources/images/go-first-view.png</file>
+     <file>../resources/images/go-first-5.png</file>
+     <file>../resources/images/go-next-view.png</file>
+     <file>../resources/images/go-last-4.png</file>
+     <file>../resources/images/go-last-view.png</file>
+     <file>../resources/images/qWellsSplash.png</file>
+ </qresource>
+ </RCC>
+ 
