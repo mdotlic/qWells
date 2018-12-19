@@ -157,7 +157,7 @@ void TMuSliderFrame::initializeValues(const int varID)
    else if (varID == 1) // mu slider
    {
       iniMin = 0.000001;
-      iniMax = 0.01;
+      iniMax = 1;
       noOfSteps = 1000;      
    }
    else

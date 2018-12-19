@@ -237,6 +237,8 @@ bool MainMenu::saveFile(const QString &fileName)
 
 
    setCurrentFile(fileName);
+   QString title = _qWells->title();
+   _qWells->setWindowTitle(title.append(" - ").append(fileName));
    _qWells->statusBar()->showMessage(tr("File saved"), 2000);
 
    _dataModified = false;

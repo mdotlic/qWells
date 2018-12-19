@@ -4,6 +4,8 @@
 #include <QDebug>
 #include <QProgressDialog>
 #include <QMessageBox>
+#include <math.h>
+
 VisResult::VisResult(Data * data):_data(data)
 {}
 
@@ -248,8 +250,8 @@ Point2 VisResult::calcOtherPoint(const Point2 & startPoint,
 {
    if(xp==-1 && yp==-1)
    {
-      xp=std::round((startPoint._x-_xmin)/_dx);//because this mesh is dual
-      yp=std::round((startPoint._y-_ymin)/_dy);
+      xp=round((startPoint._x-_xmin)/_dx);//because this mesh is dual
+      yp=round((startPoint._y-_ymin)/_dy);
    }
 
    if(xp<=0 || yp<=0 || xp>=_xdiv || yp>=_ydiv)
