@@ -241,7 +241,7 @@ void Data::changeTimeData(std::vector<Point2> & vec, const double oldTime, const
 {
    const int vecSize = int(vec.size());
 //   qDebug()<<"Data::changeTimeData | vecSize = "<<vecSize<<" | oldTime = "<<oldTime<<" | newTime = "<<newTime<<"\n";
-  if (vecSize==0) {qDebug()<<"Data::changeTimeData | ERROR - attempting to change the time in a vector of size zero! Exiting.\n";assert(false);}
+  if (vecSize==0) {qDebug()<<"Data::changeTimeData | ERROR - attempting to change the time in a vector of size zero! Exiting."<<vecSize<<" dok je "<<vec.size()<<"\n";assert(false);}
   
    int i = 0;
    int saveI = vecSize;
@@ -254,8 +254,12 @@ void Data::changeTimeData(std::vector<Point2> & vec, const double oldTime, const
          saveI = i;
          i = vecSize+1; // exit while loop
       }
-      else if (vec[i]._x < oldTime * convertTimeUnit()) i = i + 1;
-      else assert(false);
+      else if (fabs(vec[i]._x - oldTime * convertTimeUnit()) > 0) i = i + 1;
+      else
+      {
+         qDebug()<<"Should never happen \n";
+         assert(false);
+      }
    }
    // TODO sort vec by time, in ascending order:
    i = 0;

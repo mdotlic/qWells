@@ -1,6 +1,6 @@
 
 TEMPLATE = app
-TARGET = qWells_1.3.26
+TARGET = qWells_1.3.27
 
 CONFIG += qt \
 c++11

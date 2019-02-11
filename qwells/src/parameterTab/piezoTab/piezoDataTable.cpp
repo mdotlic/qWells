@@ -81,7 +81,10 @@ void PiezoDataTable::submitTime(const double tVal)
 {
    if (_dat[1] != dMax) 
    {
-      _data->changeTimeData(_data->piezometers()[_piezometerNo].Sm(), _dat[0],tVal);
+      if(_data->piezometers()[_piezometerNo].Sm().size()==0)
+         _data->changeVectorData(_data->piezometers()[_piezometerNo].Sm(), Point2(_dat[0],_dat[1]));
+      else
+         _data->changeTimeData(_data->piezometers()[_piezometerNo].Sm(), _dat[0],tVal);
 #ifdef QDEBUG_ALL
       qDebug()<<"PiezoDataTable::submitTime() | (time,Sm) = ("<<tVal<<","<<_dat[1]<<") submitted\n";
 #endif
@@ -204,7 +207,10 @@ void PiezoDataTable::verifyEntryAndMoveFocus(const int row, const int col, const
                }
                _piezoTab->warningLabel()->hide();
             }
-            if (_entryIsValid[row][0] && _entryIsValid[row][1]) submitTime(tryD);
+            if (_entryIsValid[row][0] && _entryIsValid[row][1])
+            {
+               submitTime(tryD);
+            }
             _entryIsValid[row][0] = true;
             _dat[0] = tryD;
             if (_time.size()>0) _time[row] = tryD;
@@ -253,6 +259,7 @@ void PiezoDataTable::verifyEntryAndMoveFocus(const int row, const int col, const
                {
                   makeNewRow(row+1,true);
                   setCurrentCell(row+1,0);
+                  qDebug()<<" 444 "<<_data->piezometers()[0].Sm().size()<<"\n";
                   return;
                }
                else if (_moveThisRow) 
@@ -272,7 +279,8 @@ void PiezoDataTable::verifyEntryAndMoveFocus(const int row, const int col, const
    else _entryIsValid[row][col] = false;
 #ifdef QDEBUG_ALL
    qDebug()<<"PiezoDataTable::returnPressHandle() END\n";
-#endif  
+#endif 
+   qDebug()<<" na kraju "<<_data->piezometers()[0].Sm().size()<<"\n";
 }
 
 void PiezoDataTable::pasteFromClipboard()
@@ -317,7 +325,6 @@ void PiezoDataTable::pasteFromClipboard()
       for (int j=0;j<noOfCols;j++)
       {
          dataString = rowString.section(endColMark,j,j);
-         qDebug()<<"i = "<<i<<" j = "<<j<<" | dataString = "<<dataString<<"\n";
          if (dataString=="") 
          {
             if (j==0) 
@@ -349,7 +356,6 @@ void PiezoDataTable::pasteFromClipboard()
          }
       }
    }
-   
    // change Table & Data:
    if (!dataComplete)
    {
