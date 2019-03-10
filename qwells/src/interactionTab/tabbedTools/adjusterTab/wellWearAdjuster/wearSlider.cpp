@@ -235,7 +235,7 @@ void WearSlider::setInitialization()
 }
 
 void WearSlider::initialize(const double iniMinA, const double iniMaxA, const int noOfStepsA, const double valueA, const double iniMinB, const double iniMaxB, const int noOfStepsB, const double valueB)
-{   
+{  
    // these three don't trigger signals because there is no Return press
    _minValueA->enterData(iniMinA);
    _maxValueA->enterData(iniMaxA);
@@ -255,7 +255,9 @@ void WearSlider::initialize(const double iniMinA, const double iniMaxA, const in
    _valueB->setNoOfSteps(noOfStepsB);
    _sliderB->setMaximum(noOfStepsB);
    
+   /*MD: Commented this block and added two lines below
    // set values and sliders - we don't want to write data back to Data so we avoid procedures that do so
+   
    int sliderValue;
    sliderValue = noOfStepsA * (valueA - iniMinA) / (iniMaxA - iniMinA);
    _valueA->setValueFromData(valueA,sliderValue);
@@ -264,6 +266,9 @@ void WearSlider::initialize(const double iniMinA, const double iniMaxA, const in
    sliderValue = noOfStepsB * (valueB - iniMinB) / (iniMaxB - iniMinB);
    _valueB->setValueFromData(valueB,sliderValue);
    _sliderB->setValue(sliderValue);
+   */
+   setAFromData(_wellID);
+   setBFromData(_wellID);
 }
 
 void WearSlider::setValueAMin(const double dVal)
