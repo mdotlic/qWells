@@ -25,6 +25,7 @@
 // sliderID = 0 for boundarySlider, sliderID = 1 for wellConditionSlider
 WearSlider::WearSlider(Data * data, QWellsPlot * plot, Result * result, const int wellID) : QFrame(), _data(data), _wellID(wellID)
 {
+
    QGridLayout * sliderFrameLayout = new QGridLayout;
 
    _minValueA = new MinMaxDoubleValue();
@@ -157,6 +158,7 @@ WearSlider::WearSlider(Data * data, QWellsPlot * plot, Result * result, const in
    
    setConnections();
    setInitialization();
+
 }
 
 void WearSlider::setConnections()
@@ -231,11 +233,21 @@ void WearSlider::setInitialization()
    if (vectorSize > 0) valueB = _data->wells()[_wellID].bigB(0)._y;
    else valueB = 0.0;
 
+   if (_dMinA>valueA)
+      _dMinA = valueA;
+   if (_dMaxA<valueA)
+      _dMaxA = valueA;
+   if (_dMinB>valueB)
+      _dMinB = valueB;
+   if (_dMaxB<valueB)
+      _dMaxB = valueB;
+
+
    initialize(_dMinA,_dMaxA,stepsA,valueA,_dMinB,_dMaxB,stepsB,valueB);
 }
 
 void WearSlider::initialize(const double iniMinA, const double iniMaxA, const int noOfStepsA, const double valueA, const double iniMinB, const double iniMaxB, const int noOfStepsB, const double valueB)
-{  
+{ 
    // these three don't trigger signals because there is no Return press
    _minValueA->enterData(iniMinA);
    _maxValueA->enterData(iniMaxA);
@@ -255,7 +267,6 @@ void WearSlider::initialize(const double iniMinA, const double iniMaxA, const in
    _valueB->setNoOfSteps(noOfStepsB);
    _sliderB->setMaximum(noOfStepsB);
    
-   /*MD: Commented this block and added two lines below
    // set values and sliders - we don't want to write data back to Data so we avoid procedures that do so
    
    int sliderValue;
@@ -266,9 +277,6 @@ void WearSlider::initialize(const double iniMinA, const double iniMaxA, const in
    sliderValue = noOfStepsB * (valueB - iniMinB) / (iniMaxB - iniMinB);
    _valueB->setValueFromData(valueB,sliderValue);
    _sliderB->setValue(sliderValue);
-   */
-   setAFromData(_wellID);
-   setBFromData(_wellID);
 }
 
 void WearSlider::setValueAMin(const double dVal)
