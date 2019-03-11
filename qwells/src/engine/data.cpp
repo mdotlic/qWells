@@ -373,7 +373,7 @@ void Data::deleteRowOfWellData(const int wellID, const double & time)
 //       assert(false);
 //    }
    
-   std::vector<Point2> & b = _wells[wellID].Sm();
+   std::vector<Point2> & b = _wells[wellID].bigB();
    const int bi = findElementForGivenTime(b,time*convertTimeUnit());
    if (bi >= 0) b.erase(b.begin()+bi);
 //    {

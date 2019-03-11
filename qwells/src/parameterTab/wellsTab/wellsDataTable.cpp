@@ -589,14 +589,17 @@ void WellsDataTable::pasteFromClipboard()
 #ifdef QDEBUG_ALL
          qDebug()<<"WellsDataTable::pasteFromClipboard() | REMOVING ROW "<<rowCount()-1<<" | rowCount = "<<rowCount()<<" (remove a total of "<<rowDiff<<" rows)\n";
 #endif
-         for (int i=0;i<columnCount();i++) removeCellWidget(rowCount()-1,i);
+         for (int j=0;j<columnCount();j++) removeCellWidget(rowCount()-1,j);
          removeRow(rowCount()-1);
       }
    }
+   for (int i=0;i<_time.size();i++)
+      deleteRowOfData(_time[i]);
    _entryIsValid.resize(0);
    _time.resize(0);
    _dat.clear();
    _dat.resize(noOfCols);
+
    for (int i=0;i<noOfRows;i++)
    {
       for (int j=0;j<noOfCols;j++)
