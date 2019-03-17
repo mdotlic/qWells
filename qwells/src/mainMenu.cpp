@@ -20,6 +20,7 @@
 #include <QApplication>
 #include <QFileDialog>
 #include <QDebug>
+#include <QDesktopServices>
 
 MainMenu::MainMenu(QWells * qWells) : QMenuBar(qWells), _qWells(qWells)
 {   
@@ -365,7 +366,7 @@ void MainMenu::tableSettings()
 
 void MainMenu::showHelp()
 {
-   
+   QDesktopServices::openUrl(QUrl::fromLocalFile("qWells.pdf")); 
 }
 
 void MainMenu::showAbout()

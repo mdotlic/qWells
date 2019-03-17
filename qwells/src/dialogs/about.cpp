@@ -35,7 +35,7 @@ About::About(QWells * qWells) : QDialog(qWells)
    
    constructText();
    
-   QLabel * aboutQWells = new QLabel("About qWells");
+   QLabel * aboutQWells = new QLabel("About qWells_1.3.29");
    aboutQWells->setStyleSheet("font:12px bold;");
    
    QLabel * textQWellsLabel = new QLabel(_textQWells);
