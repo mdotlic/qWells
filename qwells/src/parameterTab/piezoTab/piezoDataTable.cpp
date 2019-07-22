@@ -66,7 +66,10 @@ void PiezoDataTable::submitCell(const int col)
    
    if (col == 1) 
    {
-      if (_dat[1] != dMax) _data->changeVectorData(_data->piezometers()[_piezometerNo].Sm(), Point2(_dat[0],_dat[1]));
+      if (_dat[1] != dMax) 
+      {
+         _data->changeVectorData(_data->piezometers()[_piezometerNo].Sm(), Point2(_dat[0],_dat[1]));
+      }
 #ifdef QDEBUG_ALL
       qDebug()<<" **** PiezoDataTable | (time,Sm) = ("<<_dat[0]<<","<<_dat[1]<<") submitted\n";
 #endif
@@ -78,13 +81,24 @@ void PiezoDataTable::submitCell(const int col)
 }
 
 void PiezoDataTable::submitTime(const double tVal)
-{
+{  
+   if (_dat[0] == tVal) 
+   {    
+#ifdef QDEBUG_ALL
+      qDebug()<<"WellsDataTable::submitTime START | oldTime = newTime = "<<tVal<<"\n";
+#endif
+      return;                 
+   }
    if (_dat[1] != dMax) 
    {
       if(_data->piezometers()[_piezometerNo].Sm().size()==0)
+      {
          _data->changeVectorData(_data->piezometers()[_piezometerNo].Sm(), Point2(_dat[0],_dat[1]));
+      }
       else
+      {
          _data->changeTimeData(_data->piezometers()[_piezometerNo].Sm(), _dat[0],tVal);
+      }
 #ifdef QDEBUG_ALL
       qDebug()<<"PiezoDataTable::submitTime() | (time,Sm) = ("<<tVal<<","<<_dat[1]<<") submitted\n";
 #endif
@@ -396,6 +410,7 @@ void PiezoDataTable::pasteFromClipboard()
          if (auxValidTable[i][j]) 
          {
             _dat[j] = auxDataTable[i][j];
+
             if (j==0) 
             {
                submitTime(_dat[0]);
@@ -404,13 +419,14 @@ void PiezoDataTable::pasteFromClipboard()
             else 
             {
                setCurrentCell(i,j);
-               submitCell(j);
+               submitCell(j);               
             }
          }
+
          validRow[j] = auxValidTable[i][j];
       }
       _entryIsValid.push_back(validRow);
-   }
+   }               
    for (int j=0;j<noOfCols;j++)
    {
       LineEdit * tcell = static_cast<LineEdit*>(cellWidget(rowCount()-1,j));
